@@ -1,0 +1,25 @@
+// Modified last: 24/02/2025
+// Originally Created by : Anil Variyar/ Pixagan Technologies Private Limited
+
+
+export const CHANNEL_LIST_REQUEST = 'CHANNEL_LIST_REQUEST';
+export const CHANNEL_LIST_SUCCESS = 'CHANNEL_LIST_SUCCESS';
+export const CHANNEL_LIST_FAIL    = 'CHANNEL_LIST_FAIL';
+export const CHANNEL_LIST_ADD     = 'CHANNEL_LIST_ADD';
+export const CHANNEL_LIST_DELETE  = 'CHANNEL_LIST_DELETE';
+export const CHANNEL_LIST_UPDATE  = 'CHANNEL_LIST_UPDATE';
+
+export const CHANNEL_ADD_SUBSCRIBER  = 'CHANNEL_ADD_SUBSCRIBER';
+
+export const CHANNEL_DETAIL        = 'CHANNEL_DETAIL';
+export const CHANNEL_DETAIL_FAIL   = 'CHANNEL_DETAIL_FAIL';
+
+export const CHANNEL_UPDATE_RT  = 'CHANNEL_UPDATE_RT';
+
+export const CHANNEL_SELECT  = 'CHANNEL_SELECT';
+
+
+export const CHANNEL_LIST_CLEAR = 'CHANNEL_LIST_CLEAR'
+export const CHANNEL_DETAIL_CLEAR = 'CHANNEL_DETAIL_CLEAR'
+export const CHANNEL_SELECT_CLEAR = 'CHANNEL_SELECT_CLEAR'
+

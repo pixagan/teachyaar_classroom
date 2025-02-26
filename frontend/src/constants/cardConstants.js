@@ -1,0 +1,51 @@
+// Modified last: 24/02/2025
+// Originally Created by : Anil Variyar/ Pixagan Technologies Private Limited
+
+
+export const CARD_LIST_REQUEST = 'CARD_LIST_REQUEST';
+export const CARD_LIST_SUCCESS = 'CARD_LIST_SUCCESS';
+export const CARD_LIST_FAIL    = 'CARD_LIST_FAIL';
+export const CARD_LIST_ADD     = 'CARD_LIST_ADD';
+export const CARD_LIST_DELETE  = 'CARD_LIST_DELETE';
+export const CARD_LIST_UPDATE  = 'CARD_LIST_UPDATE';
+
+export const CARD_ADDTAG    = 'CARD_ADDTAG';
+export const CARD_DELETETAG = 'CARD_DELETETAG';
+
+export const CARD_ADDITEM    = 'CARD_ADDITEM';
+export const CARD_DELETEITEM = 'CARD_DELETEITEM';
+export const CARD_DELETEITEM_FAIL = 'CARD_DELETEITEM_FAIL';
+
+export const CARD_LIST_STUDYNOTES  = 'CARD_LIST_STUDYNOTES';
+export const CARD_ADD_STUDYNOTES   = 'CARD_ADD_STUDYNOTES';
+export const CARD_STUDYNOTES_FAIL  = 'CARD_STUDYNOTES_FAIL';
+
+
+export const CARD_ADD_EXAMQFILE   = 'CARD_ADD_EXAMQFILE';
+export const CARD_UPDATE_EXAM   = 'CARD_UPDATE_EXAM';
+
+export const CARD_DOWNLOAD_EXAMQFILE   = 'CARD_DOWNLOAD_EXAMQFILE';
+
+export const CARD_POST    = 'CARD_POST';
+export const CARD_POST_ERROR    = 'CARD_POST_ERROR';
+
+export const CARD_UPDATE_RT    = 'CARD_UPDATE_RT';
+
+export const CARD_LIVE_START   = 'CARD_LIVE_START';
+export const CARD_LIVE_JOIN    = 'CARD_LIVE_JOIN';
+export const CARD_LIVE_LEAVE   = 'CARD_LIVE_LEAVE';
+export const CARD_LIVE_END     = 'CARD_LIVE_END';
+export const CARD_LIVE_ERROR   = 'CARD_LIVE_ERROR';
+
+
+export const CARD_TAKE_EXAM         = 'CARD_TAKE_EXAM';
+export const CARD_TAKE_EXAM_ERROR   = 'CARD_TAKE_EXAM_ERROR';
+
+
+export const CARD_ADD_ANNOUNCEMENT   = 'CARD_ADD_ANNOUNCEMENT';
+
+
+export const CARD_LIST_CLEAR   = 'CARD_LIST_CLEAR';
+export const CARD_STUDYNOTES_CLEAR = 'CARD_STUDYNOTES_CLEAR'
+export const CARD_LIVE_CLEAR = 'CARD_LIVE_CLEAR'
+export const CARD_TAKE_EXAM_CLEAR = 'CARD_TAKE_EXAM_CLEAR'

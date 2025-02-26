@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.header {
+  background-color: #00bdee;
+  /* #174663; */
+  padding: -10px;
+}
+
+.footer {
+  background-color: #00bdee;
+  color: black;
+}
+
+.card_home_header {
+  text-align: center;
+  font-weight: 900;
+  border-radius: 15px;
+}
+
+.card_home_teacher {
+  background-color: #48d1cc;
+  border-radius: 15px;
+}
+
+.card_home_student {
+  background-color: #d58ae7;
+  padding-top: 2px;
+  border-radius: 15px;
+}
+
+.card_register {
+  background-color: #f5deb3;
+  border-radius: 15px;
+}
+
+.card_home_header {
+  text-align: center;
+  font-weight: 900;
+  border-radius: 15px;
+}
+.button_gen {
+  background-color: #ebdc0c;
+  /* background-color: #174663; */
+  color: black;
+  border-radius: 10px;
+}
+
+.body {
+  display: flex;
+  height: 90vh;
+  border-style: hidden;
+}
+
+.sidenav {
+  width: 15vw;
+  height: 90vh;
+  border-style: None;
+  border-width: 1px;
+  padding: 2px;
+  overflow: scroll;
+}
+
+.content {
+  height: 90vh;
+  border-style: None;
+  border-width: 1px;
+  padding: 2px;
+  width: 55vw;
+  overflow: scroll;
+}
+
+.content_right {
+  height: 90vh;
+  border-style: None;
+  border-width: 1px;
+  padding: 2px;
+  width: 30vw;
+  overflow: scroll;
+}
