@@ -76,6 +76,8 @@ const authUser = asyncHandler(async (req,res) => {
             throw new Error('Login error')
         }
 
+        console.log("Entered Password ", password)
+
 
         if(user && await user.matchPassword(password)){
 

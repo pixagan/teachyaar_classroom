@@ -1,0 +1,20 @@
+export const UPDATE_SESSION_TITLE = 'UPDATE_SESSION_TITLE'
+export const SESSION_TITLE_FAIL = 'SESSION_TITLE_FAIL'
+
+export const CARD_LIST        = 'CARD_LIST';
+export const ADD_CARD        = 'ADD_CARD';
+export const CARDS_FAIL      = 'CARDS_FAIL';
+
+export const UPDATE_CARD_TITLE = 'UPDATE_CARD_TITLE'
+export const UPDATE_VIDEO_CARD  = 'UPDATE_VIDEO_CARD'
+
+export const ADD_CARD_ITEM    = 'ADD_CARD_ITEM'
+export const DELETE_CARD      = 'DELETE_CARD'
+export const UPDATE_CARD_ITEM = 'UPDATE_CARD_ITEM'
+export const DELETE_CARD_ITEM = 'DELETE_CARD_ITEM'
+
+export const SESSION_VIEW_MODE = 'SESSION_VIEW_MODE'
+export const CLEAR_SESSION = 'CLEAR_SESSION'
+export const CLEAR_CARDS = 'CLEAR_CARDS'
+
+export const ADD_QUESTION_TEST = 'ADD_QUESTION_TEST'

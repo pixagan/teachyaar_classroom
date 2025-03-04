@@ -29,11 +29,11 @@ const userInfoItemsFromStorage = localStorage.getItem('userInfo') ? JSON.parse(l
 
 const initialState = {
 
-   userState: { userInfo: userInfoItemsFromStorage },
+   userLogin: { userInfo: userInfoItemsFromStorage },
 
 } 
 
-const store = configureStore({reducer:reducer, initialState}); //, devTools);
+const store = configureStore({reducer:reducer, preloadedState:initialState}); //, devTools);
 
 
 export default store

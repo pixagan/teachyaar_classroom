@@ -60,7 +60,7 @@ code {
 
 .body {
   display: flex;
-  height: 90vh;
+  height: 98vh;
   border-style: hidden;
 }
 
@@ -74,16 +74,17 @@ code {
 }
 
 .content {
-  height: 90vh;
+  height: 95vh;
   border-style: None;
   border-width: 1px;
   padding: 2px;
-  width: 55vw;
+  width: 70vw;
   overflow: scroll;
+  padding-left: 10px;
 }
 
 .content_right {
-  height: 90vh;
+  height: 95vh;
   border-style: None;
   border-width: 1px;
   padding: 2px;

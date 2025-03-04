@@ -66,10 +66,6 @@ const Header = () => {
                 <Nav className="ml-auto">
 
 
-                    <LinkContainer to='/'>
-                        <Nav.Link className='navbarlink'><Button style={{  margin:'1px', paddingTop:'5px', paddingBottom:'5px', borderRadius:'20px', backgroundColor:'white', color:'black',  border:'None', borderColor:'#c2179a'}}>Home</Button></Nav.Link>
-                    </LinkContainer>
-
 
                 {!userInfo && (
 

@@ -29,11 +29,11 @@ export const userLoginReducer = (state = { userInfo: {} }, action) => {
 
     switch(action.type){
         case USER_LOGIN_REQUEST:
-            return { loading: false }
+            return { loading: false, userInfo:state.userInfo }
         case USER_LOGIN_SUCCESS:
             return { loading: false, userInfo: action.payload }
         case USER_LOGIN_FAIL:
-            return { loading: false, error: action.payload }
+            return { loading: false, userInfo:state.userInfo ,error: action.payload }
         case USER_LOGOUT:
             return { }
         default:

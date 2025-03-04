@@ -18,7 +18,13 @@ import StudentSignupScreen from './screens/StudentScreens/StudentSignupScreen'
 
 import TeacherLoginScreen from './screens/TeacherScreens/TeacherLoginScreen'
 import TeacherSignupScreen from './screens/TeacherScreens/TeacherSignupScreen'
+import TeacherHomeScreen from './screens/TeacherScreens/TeacherHomeScreen'
 import TeacherDashboardScreen from './screens/TeacherScreens/TeacherDashboardScreen'
+import NotebookCreatorScreen from './screens/TeacherScreens/NotebookCreatorScreen'
+import TeacherClassroomScreen from './screens/TeacherScreens/TeacherClassroomScreen'
+import TeacherCourseScreen from './screens/TeacherScreens/TeacherCourseScreen'
+import TeacherCourseNotesScreen from './screens/TeacherScreens/TeacherCourseNotesScreen'
+import TeacherTestsScreen from './screens/TeacherScreens/TeacherTestsScreen'
 
 import AdminLoginScreen  from './screens/AdminScreens/AdminLoginScreen'
 
@@ -50,7 +56,13 @@ const App = () => {
 
           <Route path='/teacher/login' element={<TeacherLoginScreen />} exact />
           <Route path='/teacher/signup' element={<TeacherSignupScreen />} exact />
+          <Route path='/teacher/home' element={<TeacherHomeScreen />} exact />
+          <Route path='/teacher/course/:course_id' element={<TeacherCourseScreen />} exact />
           <Route path='/teacher/dashboard' element={<TeacherDashboardScreen />} exact />
+          <Route path='/teacher/classroom/:course_id' element={<TeacherClassroomScreen />} exact />
+          <Route path='/teacher/notebook/:notebook_id' element={<NotebookCreatorScreen />} exact />
+          <Route path='/teacher/notes/:course_id' element={<TeacherCourseNotesScreen />} exact />
+          <Route path='/teacher/tests/:course_id' element={<TeacherTestsScreen />} exact />
 
           <Route path='/student/login' element={<StudentLoginScreen />} exact />
           <Route path='/student/signup' element={<StudentSignupScreen />} exact />

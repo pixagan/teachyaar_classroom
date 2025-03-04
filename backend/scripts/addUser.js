@@ -179,6 +179,20 @@ const addStudent = async (username, password, email) => {
 }
 
 
+const updateTeacherPassword = async (user_id, password) => {
+
+    const user = await User.findById(user_id)
+
+    console.log(user)
+    const salt = await bcrypt.genSalt(10)
+    const saltedpassword = await bcrypt.hash(password, salt)
+    console.log(saltedpassword)
+    
+    user.password = saltedpassword
+    await user.save()
+
+}
+
 
 
 
@@ -192,7 +206,8 @@ await connectDB()
 // addTeacher(username, password, email)
 
 
-const username = 'student1'
-const password = 'student1'
-const email    = 'student1@example.com'
-addStudent(username, password, email)
+// const username = 'student1'
+// const password = 'student1'
+// const email    = 'student1@example.com'
+// addStudent(username, password, email)
+
