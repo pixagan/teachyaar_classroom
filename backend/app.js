@@ -17,6 +17,8 @@ import cardRoutes from './routes/cardRoutes.js'
 import qandaRoutes from './routes/qandaRoutes.js'
 import examRoutes from './routes/examRoutes.js'
 
+import notebookRoutes from './routes/notebookRoutes.js'
+
 
 //import supportRoutes from './routes/supportRoutes.js'
 //import notificationRoutes from './routes/notificationRoutes.js'
@@ -52,7 +54,9 @@ app.use('/api/users', userRoutes);
 app.use('/api/channels', channelRoutes);
 app.use('/api/tycards', cardRoutes);
 app.use('/api/qanda', qandaRoutes);
-app.use('/api/exams', examRoutes);
+
+app.use('/api/exams', examRoutes);  
+app.use('/api/notebooks', notebookRoutes);
 
 //app.use('/api/support', supportRoutes);
 //app.use('/api/notification', notificationRoutes);

@@ -386,7 +386,7 @@ export const TeacherDashboardScreen = ({}) => {
                                         </Link>
                                         </OverlayTrigger>
 
-                                        <Link to={`/teacher/notes/${channel._id}`}>
+                                        <Link to={`/teacher/notebooks/${channel._id}`}>
                                         <Button className="button_gen">
                                             <i className="fas fa-sticky-note fa-lg"></i>
                                         </Button>

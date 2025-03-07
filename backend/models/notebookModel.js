@@ -7,9 +7,25 @@ import mongoose from 'mongoose'
 
 
 
+const noteitemSchema = mongoose.Schema({
+    createdBy:{type:mongoose.Schema.Types.ObjectId, ref:'User', required:true},
+    notebook_id:{type:mongoose.Schema.Types.ObjectId},
+    order:{type:Number, required:true},
+    item:{type:Object, required:true},
+    itemType:{type:String, required:true},
+}, {
+    timestamps: true
+})
+
+
+const Noteitem = mongoose.model('Noteitem', noteitemSchema);
+
+
+
+
 const notecardsSchema = mongoose.Schema({
     title:{type:String, required:true, unique:true},
-    course_id:{type:mongoose.Schema.Types.ObjectId},
+    notebook_id:{type:mongoose.Schema.Types.ObjectId},
     session_id:{type:mongoose.Schema.Types.ObjectId},
     url:{type:String, unique:true},
     language:{type:String, default:'English'},
@@ -70,26 +86,12 @@ const Notecards = mongoose.model('Notecards', notecardsSchema);
 
 
 
-const notecoverSchema = mongoose.Schema({
-    title:{type:String},
-    notebook:{type:mongoose.Schema.Types.ObjectId},
-    shelf:{type:String},
-    url:{type:String}
-
-}, {
-    timestamps: true
-})
-
-
-const Notecover = mongoose.model('Notecover', notecoverSchema);
-
-
-
 const notebookSchema = mongoose.Schema({
-    url:{type:String,unqiue:true},
-    title:{type:String, required:true},
-    cards:[],
-    isPosted: {type:Boolean, required:true, default:true}
+    createdBy:{type:mongoose.Schema.Types.ObjectId, ref:'User', required:true},
+    course_id:{type:mongoose.Schema.Types.ObjectId},
+    title:{type:String, required:true, unique:true},
+    cards:[{type:mongoose.Schema.Types.ObjectId, ref:'Notecards'}],
+    isPosted: {type:Boolean, required:true, default:false}
 
 }, {
     timestamps: true
@@ -101,20 +103,4 @@ const Notebook = mongoose.model('Notebook', notebookSchema);
 
 
 
-const shelfSchema = mongoose.Schema({
-    title:{type:String},
-    covers:[notecoverSchema]
-
-}, {
-    timestamps: true
-})
-
-
-const Shelf = mongoose.model('Shelf', shelfSchema);
-
-
-
-
-
-
-export {Notecards, Notebook, Notecover, Shelf};
+export {Notecards, Notebook, Noteitem};

@@ -1,10 +1,8 @@
 import React , {useState, useEffect,  Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Row, Col, Card, Button, Form,  OverlayTrigger, Tooltip, InputGroup, ListGroup, Badge } from 'react-bootstrap'
+import { Form,  InputGroup, Badge } from 'react-bootstrap'
 
-import Moment from 'react-moment';
-import DateFormatted from '../utils/DateFormatted'
 
 import {updateCardTitle, deleteCard} from '../../actions/notebookActions'
 

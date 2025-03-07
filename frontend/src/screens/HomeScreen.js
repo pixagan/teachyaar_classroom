@@ -13,9 +13,11 @@ import Message from '../components/utils/Message'
 import Loader from '../components/utils/Loader'
 import FormContainer from '../components/utils/FormContainer'
 
-
+import { useNavigate } from 'react-router-dom';
 
 export const LandingScreen = ({match, history}) => {
+
+    const navigate = useNavigate();
 
     
     const [name, setName ] = useState('')
@@ -34,14 +36,21 @@ export const LandingScreen = ({match, history}) => {
     // const userRegister = useSelector(state => state.userRegister)
     // const { loading, error, userInfo } =  userRegister
 
-    // const userLogin = useSelector(state => state.userLogin)
-    // const { userInfo:userInfoL } = userLogin
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
 
 
     useEffect(() => {
         
+        if(userInfo){
+            if(userInfo.token && userInfo.isTeacher){
+                navigate(`/teacher/home`)
+            }
+            
+            
+        }
 
-    }, [])
+    }, [userInfo])
 
 
     const popover = (

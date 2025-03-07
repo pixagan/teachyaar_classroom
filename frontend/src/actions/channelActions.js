@@ -16,11 +16,6 @@ import {
     CHANNEL_DETAIL,
     CHANNEL_DETAIL_FAIL,
 
-
-
-
-
-
 } from '../constants/channelConstants'
 
 import {
@@ -30,6 +25,12 @@ import {
 import {
     QANDA_LIST_SUCCESS
 } from '../constants/qandaConstants'
+
+
+import {
+    LOAD_NOTEBOOK_LIST,
+    NOTEBOOK_LIST_FAIL,
+} from '../constants/notebookConstants'
 
 
 export const listChannels = () => async (dispatch, getState) => {
@@ -471,4 +472,43 @@ export const deleteChannel = (channel_id) => async (dispatch, getState) => {
 
 
     }
+}
+
+
+
+
+
+export const listCourseNotebooks = (course_id) => async (dispatch, getState) => {
+
+    try{
+
+        const { userLogin: { userInfo }} = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.get(`/api/channels/notebooks/${course_id}`, config)
+
+
+
+        console.log("Notebooks : ", data)
+        dispatch({
+            type: LOAD_NOTEBOOK_LIST,
+            payload: data
+        })
+
+    }catch (error){
+
+        dispatch({
+            type: NOTEBOOK_LIST_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+
+        })
+
+    }
+
 }

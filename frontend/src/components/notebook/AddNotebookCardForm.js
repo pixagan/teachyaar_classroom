@@ -103,12 +103,10 @@ export const AddNotebookCardForm = ({index, slcard}) => {
 
                 <InputGroup>
                 
-                    <Button style={{backgroundColor:'#c2179a', paddingTop:'2px', paddingBottom:'2px'}} onClick={()=>addCardRequest('note')}>Note</Button>
-                    {/* <Button style={{backgroundColor:'#c2179a', paddingTop:'2px', paddingBottom:'2px'}} onClick={()=>addCardRequest('example')}>Example</Button> */}
-                    <Button style={{backgroundColor:'#c2179a', paddingTop:'2px', paddingBottom:'2px'}} onClick={()=>addCardRequest('test')}>Test</Button>
-                    <Button style={{backgroundColor:'#c2179a', paddingTop:'2px', paddingBottom:'2px'}} onClick={()=>addCardRequest('video')}>Video</Button>
-                    {/* <Button>Slide</Button>
-                    <Button>Canvas</Button> */}
+                    <Button className="button_gen" style={{backgroundColor:'#00bdee', paddingTop:'2px', paddingBottom:'2px'}} onClick={()=>addCardRequest('note')}>+</Button>
+                    {/* <Button style={{backgroundColor:'#c2179a', paddingTop:'2px', paddingBottom:'2px'}} onClick={()=>addCardRequest('test')}>Test</Button>
+                    <Button style={{backgroundColor:'#c2179a', paddingTop:'2px', paddingBottom:'2px'}} onClick={()=>addCardRequest('video')}>Video</Button> */}
+
                 
                 </InputGroup>
 

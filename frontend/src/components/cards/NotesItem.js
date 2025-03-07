@@ -231,7 +231,7 @@ export const NotesItem = ({card}) => {
         <>
 
 
-                <Card>
+                <Card style={{border:'None'}}>
 
 
                     {/* <Card.Body> */}

@@ -16,6 +16,9 @@ import {listChannels, createChannel, deleteChannel, updateChannelRT, enrollReque
 import {listTYCards, createTYCard} from '../../actions/cardActions'
 import {listQPosts} from '../../actions/qandaActions'
 
+import {listCourseNotebooks} from '../../actions/channelActions'
+import {createNotebook} from '../../actions/notebookActions'
+
 import {useInterval} from '../../hooks/useInterval'
 import { useHistory } from 'react-router-dom'
 
@@ -27,11 +30,11 @@ import {
     deviceDetect
   } from "react-device-detect";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,  useParams } from 'react-router-dom';
 
 
 
-export const TeacherCourseNotesScreen = ({}) => {
+export const TeacherNotebooksScreen = ({}) => {
     
 
     const loading = false;
@@ -43,16 +46,20 @@ export const TeacherCourseNotesScreen = ({}) => {
     //const history = useHistory()
     const navigate = useNavigate();
 
+    const { course_id } = useParams();
+
+    const [notebookTitle, setNotebookTitle] = useState('')
+
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
 
-    const channelDetail = useSelector(state => state.channelDetail)
-    const { loading:loadingCS, error:errorCS, channel:channelCS } = channelDetail
+    const notebookList = useSelector(state => state.notebookList)
+    const { notebooks:notebooks } = notebookList
 
     const notes = [{
-        id:1,
+        _id:"asd3adasdadads",
         title:'Note 1',
         description:'This is a note',
         content:'This is the content of the note',
@@ -60,14 +67,20 @@ export const TeacherCourseNotesScreen = ({}) => {
         updatedAt:'2021-01-01'
     }]
 
+    const addNotebookRequest = (e) => {
+        e.preventDefault()
+        dispatch(createNotebook(notebookTitle, course_id))
+    }
+
+    const navigateToNotebook = (notebook_id) => {
+        navigate(`/teacher/notebook/${notebook_id}`)
+    }
+
 
 
     useEffect(() => {
 
-
-            //dispatch(listChannels())
-
-
+            dispatch(listCourseNotebooks(course_id))
 
     }, [])
 
@@ -80,8 +93,35 @@ export const TeacherCourseNotesScreen = ({}) => {
 
             <h1>Notes</h1>
 
-            {notes && notes.map((cnote, cindex)=>(
-                <Card>
+            <Card style={{border:'None', marginBottom:'10px'}}>
+
+                <Form onSubmit={addNotebookRequest}>
+
+                    <InputGroup>
+
+                        <Form.Group controlId='channelName' style={{width:'80%'}}>
+                            <Form.Control type='text' placeholder='Notebook Title' value={notebookTitle} onChange={(e) => setNotebookTitle(e.target.value)}> 
+                            </Form.Control>
+                        </Form.Group>
+
+
+                        <Button className="button_gen" type='submit' variant='primary'>
+                            Create
+                        </Button>
+                     
+                    </InputGroup>
+
+
+
+                </Form>
+
+
+            </Card>
+
+            
+
+            {notebooks && notebooks.map((cnote, cindex)=>(
+                <Card key={cindex} onClick={() => navigateToNotebook(cnote._id)}>
                     <Card.Header>
                         <Card.Title>{cnote.title}</Card.Title>
                     </Card.Header>
@@ -97,4 +137,4 @@ export const TeacherCourseNotesScreen = ({}) => {
 }
 
 
-export default TeacherCourseNotesScreen
+export default TeacherNotebooksScreen

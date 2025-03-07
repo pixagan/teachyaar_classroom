@@ -7,12 +7,11 @@ import Moment from 'react-moment';
 
 import {updateCardItem} from '../../../actions/notebookActions'
 
-export const TextItem = ({card_id, item_id, item_in}) => {
+export const TextItem = ({item_in, item_id}) => {
 
     const dispatch = useDispatch()
 
-    const notebookR = useSelector(state => state.notebookR)
-    const { sessionMode } = notebookR
+    
 
     const [text, setText] = useState('')
 
@@ -44,7 +43,7 @@ export const TextItem = ({card_id, item_id, item_in}) => {
         setViewMode('view')
         var newItem = item_in
         newItem.text = text
-        updateCardItem(card_id, item_id, newItem)
+        //updateCardItem(item_id, newItem)
 
     }
 
@@ -66,7 +65,7 @@ export const TextItem = ({card_id, item_id, item_in}) => {
             ): (
 
                 <>
-                {sessionMode == 'edit' && (
+                {viewMode == 'edit' && (
                     <InputGroup>
                     <Form.Control type='text' placeholder='text' value={text} onChange={(e) => setText(e.target.value)} style={{backgroundColor:'white'}}> 
                     </Form.Control>
@@ -80,7 +79,7 @@ export const TextItem = ({card_id, item_id, item_in}) => {
                 
             )}
 
-                {sessionMode == 'edit' && (
+                {viewMode == 'edit' && (
                     <span>
                     <Badge style={{padding:'5px'}} onClick={()=>toggleViewMode()}><i className="fas fa-edit" ></i></Badge>
                     <Badge style={{padding:'5px'}} onClick={()=>deleteItem()}><i className="fas fa-trash" ></i></Badge>

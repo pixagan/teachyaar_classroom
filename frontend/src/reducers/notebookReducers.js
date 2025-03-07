@@ -1,4 +1,7 @@
+
 import {
+
+
 
     ADD_CARD,
     CARDS_FAIL,
@@ -24,43 +27,171 @@ import {
 } from '../constants/notebookConstants'
 
 
+import {
+    LOAD_NOTEBOOK_LIST,
+    NOTEBOOK_LIST_FAIL,
+    DELETE_NOTEBOOK,
+    ADD_NOTEBOOK,
 
-export const cardListReducer = (state = { cards: []}, action) => {
+    NOTEBOOK_ITEM_LIST,
+    ADD_NOTEBOOK_ITEM,
+    UPDATE_NOTEBOOK_ITEM,
+    DELETE_NOTEBOOK_ITEM,
+    NOTEBOOK_ITEM_FAIL,
+    CLEAR_NOTEBOOK_ITEMS,
+
+    LOAD_NOTEBOOK_DETAIL,
+    NOTEBOOK_DETAIL_FAIL,
+
+    UPDATE_NOTEBOOK_TITLE,
+    NOTEBOOK_TITLE_FAIL,
+
+} from '../constants/notebookConstants'
+
+
+
+
+export const notebookListReducer = (state = { notebooks: []}, action) => {
+
+    switch(action.type){
+        case LOAD_NOTEBOOK_LIST:
+            return { loading: true, notebooks: action.payload }
+        
+
+        case ADD_NOTEBOOK:
+            return { loading: true, notebooks:[...state.notebooks, action.payload]}
+
+        case NOTEBOOK_LIST_FAIL:
+            return { loading: false, error: action.payload, notebooks:state.notebooks }
+        
+        case DELETE_NOTEBOOK:
+            return { loading: true, notebooks:state.notebooks.filter(notebook => notebook._id != action.payload)}
+        
+        default:
+            return state
+    }
+
+
+}
+
+
+
+
+export const notebookReducer = (state = { notebookdetail:{}}, action) => {
+
+    switch(action.type){
+        case LOAD_NOTEBOOK_DETAIL:
+            return { loading: true, notebookdetail:action.payload}
+        
+
+        case UPDATE_NOTEBOOK_TITLE:
+            return { loading: true, notebookdetail:action.payload}
+
+        case NOTEBOOK_DETAIL_FAIL:
+            return { loading: true, notebookdetail:state.notebookdetail}
+        
+
+        default:
+            return state
+    }
+
+}
+
+
+
+
+
+
+export const notebookItemsReducer = (state = { notebookcards: []}, action) => {
+
+    switch(action.type){
+
+        case NOTEBOOK_ITEM_LIST:
+            return { loading: true, notebookcards:action.payload}
+        
+       
+        case ADD_NOTEBOOK_ITEM:
+            return { loading: true, notebookcards:[...state.notebookcards, action.payload]}
+        
+
+        case DELETE_NOTEBOOK_ITEM:
+            return { loading: true, notebookcards:state.notebookcards.filter(card => card._id != action.payload)}
+        
+
+
+        case UPDATE_NOTEBOOK_ITEM:
+            return { loading: true, 
+    
+                notebookcards: state.notebookcards.map(card => card.id === action.payload.card_id ? { 
+                    ...card, 
+                        items:
+                        [...card.items.map( item => item._id === action.payload.item_id ?{ ...item, 
+                            text:action.payload.text
+                        }: item
+
+                        ),
+                        ]
+                }:card)
+            
+            }
+        case CLEAR_NOTEBOOK_ITEMS:
+            return { loading: true, notebookcards:[]}
+        
+
+
+        case NOTEBOOK_ITEM_FAIL:
+            return { loading: false, error: action.payload, notebookcards:state.notebookcards }
+        default:
+            return state
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+export const notebookcardListReducer = (state = { notebookcards: []}, action) => {
 
     switch(action.type){
 
         case CARD_LIST:
-            return { loading: true, cards:action.payload}
+            return { loading: true, notebookcards:action.payload}
         
        
         case ADD_CARD:
-            return { loading: true, cards:[...state.cards, action.payload]}
+            return { loading: true, notebookcards:[...state.notebookcards, action.payload]}
         
 
         case DELETE_CARD:
-            return { loading: true, cards:state.cards.filter(card => card._id != action.payload)}
+            return { loading: true, notebookcards:state.notebookcards.filter(card => card._id != action.payload)}
         
 
 
         case UPDATE_VIDEO_CARD:
             return { loading: true, 
-                cards: state.cards.map(card => card._id === action.payload.card_id ? { ...card,url: action.payload.url, description: action.payload.description} : card),
+                notebookcards: state.notebookcards.map(card => card._id === action.payload.card_id ? { ...card,url: action.payload.url, description: action.payload.description} : card),
             }
         
 
         case ADD_CARD_ITEM:
-            return { loading: true, cards:state.cards.map(card => card._id === action.payload.card_id ? { ...card, items:[...card.items, action.payload.item]} : card)}
+            return { loading: true, notebookcards:state.notebookcards.map(card => card._id === action.payload.card_id ? { ...card, items:[...card.items, action.payload.item]} : card)}
         
         case ADD_QUESTION_TEST:
             return { loading: true, 
-                cards: state.cards.map(card => card._id === action.payload.card_id ? { ...card, questions:[...card.questions, action.payload.question]} : card)}
+                notebookcards: state.notebookcards.map(card => card._id === action.payload.card_id ? { ...card, questions:[...card.questions, action.payload.question]} : card)}
 
 
 
         case UPDATE_CARD_ITEM:
             return { loading: true, 
     
-                cards: state.cards.map(card => card.id === action.payload.card_id ? { 
+                notebookcards: state.notebookcards.map(card => card.id === action.payload.card_id ? { 
                     ...card, 
                         items:
                         [...card.items.map( item => item._id === action.payload.item_id ?{ ...item, 
@@ -76,54 +207,26 @@ export const cardListReducer = (state = { cards: []}, action) => {
 
         case DELETE_CARD_ITEM:
             return { loading: true, 
-                cards:state.cards.map(card => card._id === action.payload.card_id ? { ...card, items:card.items.filter(item=>item._id != action.payload.item_id )} : card)
+                notebookcards:state.notebookcards.map(card => card._id === action.payload.card_id ? { ...card, items:card.items.filter(item=>item._id != action.payload.item_id )} : card)
             }
     
         
 
         case UPDATE_CARD_TITLE:
             return { loading: true, 
-                cards: state.cards.map(card => card._id === action.payload._id ? { ...card, title: action.payload.title} : card), 
+                notebookcards: state.notebookcards.map(card => card._id === action.payload._id ? { ...card, title: action.payload.title} : card), 
             }
         
 
 
         
         case CLEAR_CARDS:
-            return { loading: true, cards:[]}
+            return { loading: true, notebookcards:[]}
         
 
 
         case CARDS_FAIL:
-            return { loading: false, error: action.payload, cards:state.cards }
-        default:
-            return state
-    }
-
-}
-
-
-
-
-export const notebookReducer = (state = { title: "Title", sessionMode:'edit'}, action) => {
-
-    switch(action.type){
-        case UPDATE_SESSION_TITLE:
-            return { loading: true, title:action.payload, sessionMode:state.sessionMode}
-        
-
-        case SESSION_VIEW_MODE:
-            return { loading: true, title:state.title, sessionMode:action.payload}
-        
-
-        case CLEAR_SESSION:
-            return { loading: true, title:"Title", sessionMode:state.sessionMode}
-        
-
-
-        case SESSION_TITLE_FAIL:
-            return { loading: false, error: action.payload, title:state.title, sessionMode:state.sessionMode }
-        
+            return { loading: false, error: action.payload, notebookcards:state.notebookcards }
         default:
             return state
     }
@@ -135,30 +238,32 @@ export const notebookReducer = (state = { title: "Title", sessionMode:'edit'}, a
 
 
 
-export const sessionRollReducer = (state = { sessionRoll:'single'}, action) => {
 
-    switch(action.type){
-        case UPDATE_SESSION_TITLE:
-            return { loading: true, title:action.payload, sessionMode:state.sessionMode}
+
+// export const sessionRollReducer = (state = { sessionRoll:'single'}, action) => {
+
+//     switch(action.type){
+//         case UPDATE_SESSION_TITLE:
+//             return { loading: true, title:action.payload, sessionMode:state.sessionMode}
         
 
-        case SESSION_VIEW_MODE:
-            return { loading: true, title:state.title, sessionMode:action.payload}
+//         case SESSION_VIEW_MODE:
+//             return { loading: true, title:state.title, sessionMode:action.payload}
         
 
-        case CLEAR_SESSION:
-            return { loading: true, title:"Title", sessionMode:state.sessionMode}
+//         case CLEAR_SESSION:
+//             return { loading: true, title:"Title", sessionMode:state.sessionMode}
         
 
 
-        case SESSION_TITLE_FAIL:
-            return { loading: false, error: action.payload, title:state.title, sessionMode:state.sessionMode }
+//         case SESSION_TITLE_FAIL:
+//             return { loading: false, error: action.payload, title:state.title, sessionMode:state.sessionMode }
         
-        default:
-            return state
-    }
+//         default:
+//             return state
+//     }
 
-}
+// }
 
 
 

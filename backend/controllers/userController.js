@@ -78,6 +78,8 @@ const authUser = asyncHandler(async (req,res) => {
 
         console.log("Entered Password ", password)
 
+        
+
 
         if(user && await user.matchPassword(password)){
 

@@ -250,13 +250,7 @@ export const TYCard = ({card, channel_id, qandaboard_id}) => {
 
                     </Card.Header>
 
-                        {/* <Row>
-
-                            <Col>
-                                <DateFormatted date_in={card.updatedAt}/>
-
-                            </Col>
-                        </Row> */}
+                       
 
                     <Card.Body>
 
@@ -279,18 +273,15 @@ export const TYCard = ({card, channel_id, qandaboard_id}) => {
                     )}
 
 
-                    {card.type=="Study" && (
+                    {/* {card.type=="Study" && (
                         <StudyCardItem channel_id={channel_id} card={card} cardedit={cardMode}/>
-                    )}
+                    )} */}
 
                     {card.type=="Announcement" && (
                         <AnnouncementItem channel_id={channel_id} card={card} cardedit={cardMode}/>
                     )}
 
-                    {/* {card.type=="Notification" && (
-                        <AdminNotificationCard channel_id={channel_id} card={card} cardedit={cardMode}/>
-                    )} */}
-
+                   
                 
 
 
@@ -302,9 +293,9 @@ export const TYCard = ({card, channel_id, qandaboard_id}) => {
                             <Button className="button_gen" onClick={toggledoubtView}>Interact</Button>
                             </OverlayTrigger>
 
-                            <OverlayTrigger  placement="top" overlay={privatenotesTooltip}>
+                            {/* <OverlayTrigger  placement="top" overlay={privatenotesTooltip}>
                             <Button className="button_gen" onClick={toggleStudynoteView}>Private Notes</Button>
-                            </OverlayTrigger>
+                            </OverlayTrigger> */}
                         </Col>
                     </Row>
 

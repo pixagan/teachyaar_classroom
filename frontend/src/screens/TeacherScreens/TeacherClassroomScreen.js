@@ -361,31 +361,6 @@ export const TeacherClassroomScreen = ({}) => {
                                     </InputGroup>
                                    
 
-                                {/* <Form onSubmit={addCard}>
-
-                                <Row>
-
-                                    <Col>
-                                        <Form.Group controlId="cardType">
-                                        <Form.Label></Form.Label> 
-                                        <Form.Control as="select" value={cardTextT} onChange={(e) => SetCardTypeMap(e.target.value)}>
-                                        <option>Create Notes</option>
-                                        <option>Create Exam</option>
-                                        </Form.Control>
-                                        </Form.Group>
-                                    </Col>
-
-                                    <Col>
-                                    <br />
-                                    <Button className="button_gen" type='submit' variant='primary'>
-                                    Create
-                                    </Button>
-                                    
-                                    </Col>
-
-                                </Row>
-
-                                </Form> */}
 
                                 </Card>
 
@@ -394,15 +369,6 @@ export const TeacherClassroomScreen = ({}) => {
                             
 
                             </Col>
-                            {/* <Col md={2}>
-
-                            <OverlayTrigger  placement="top" overlay={liveLectureTooltip}>
-                            <Link to={`/livelecture/${selectedChannel}`}><Button variant="success" className='btn-circle'>Live Lecture</Button></Link>
-                            </OverlayTrigger>
-
-                            </Col> */}
-
-                            
 
 
                             </Row>

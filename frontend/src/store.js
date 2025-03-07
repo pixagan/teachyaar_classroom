@@ -11,6 +11,8 @@ import { channelListReducer, channelDetailReducer, selectedChannelReducer } from
 import { cardListReducer, cardStudynotesReducer, cardLivelectureReducer, cardTakeExamReducer } from './reducers/cardReducers'
 import { qandaListReducer, qandaCardListReducer } from './reducers/qandaReducers'
 
+import { notebookListReducer,notebookReducer, notebookcardListReducer, notebookItemsReducer } from './reducers/notebookReducers'
+
 
 const reducer = combineReducers({
     userRegister:userRegisterReducer,  
@@ -21,6 +23,11 @@ const reducer = combineReducers({
     qandaCardList: qandaCardListReducer,
     cardStudynotes: cardStudynotesReducer,
     channelDetail: channelDetailReducer,
+
+    notebookList: notebookListReducer,
+    notebookR: notebookReducer,
+    notebookcardList: notebookcardListReducer,
+    notebookItems: notebookItemsReducer
 
 
 })

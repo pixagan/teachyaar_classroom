@@ -12,12 +12,13 @@ import EquationItem from './EquationItem'
 import CodeItem from './CodeItem'
 import TableItem from './TableItem'
 
-export const NoteItem = ({card_in}) => {
+// import CreateTextItem from './CreateTextItem'
+
+export const NoteItem = ({citem}) => {
 
     const dispatch = useDispatch()
 
-    const notebookR = useSelector(state => state.notebookR)
-    const { sessionMode } = notebookR
+
 
 
     useEffect(() => {
@@ -31,38 +32,38 @@ export const NoteItem = ({card_in}) => {
 
         <>
         
-            <ListGroup>
+            {/* <ListGroup>
                 {card_in.items && card_in.items.map((citem, index)=>(
-                    <ListGroup.Item>
+                    <ListGroup.Item> */}
 
-                        {citem.type == 'text' && (
-                            <TextItem item_in={citem} card_id={card_in._id} item_id={citem._id}/>
+                        {citem.itemType == 'text' && (
+                            <TextItem item_in={citem.item} item_id={citem._id}/>
                         )}
 
                         
-                        {citem.type == 'equation' && (
-                            <EquationItem item_in={citem} card_id={card_in._id} item_id={citem._id}/>
+                        {/* {citem.itemType == 'equation' && (
+                            <EquationItem item_in={citem.item} item_id={citem._id}/>
                         )}
 
-                        {citem.type == 'table' && (
-                            <TableItem item_in={citem} card_id={card_in._id} item_id={citem._id}/>
+                        {citem.itemType == 'table' && (
+                            <TableItem item_in={citem.item} item_id={citem._id}/>
                         )}
 
 
-                        {citem.type == 'code' && (
-                            <TextItem item_in={citem} card_id={card_in._id} item_id={citem._id}/>
-                        )}
+                        {citem.itemType == 'code' && (
+                            <TextItem item_in={citem.item} item_id={citem._id}/>
+                        )} */}
 
-                    
+{/*                     
                     </ListGroup.Item>
                 ))}
 
-            </ListGroup>
+            </ListGroup> */}
 
 
-            {/* {sessionMode == 'edit' && (
-                <TextItemMenu card_id={card_in._id}/>
-            )} */}
+
+            {/* <CreateTextItem card_id={card_in._id}/> */}
+     
             
         
         
