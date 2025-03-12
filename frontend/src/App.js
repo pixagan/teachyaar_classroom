@@ -26,6 +26,8 @@ import TeacherCourseScreen from './screens/TeacherScreens/TeacherCourseScreen'
 import TeacherCourseNotesScreen from './screens/TeacherScreens/TeacherNotebooksScreen'
 import TeacherTestsScreen from './screens/TeacherScreens/TeacherTestsScreen'
 import TeacherNotebooksScreen from './screens/TeacherScreens/TeacherNotebooksScreen'
+import TestCreatorScreen from './screens/TeacherScreens/TestCreatorScreen'
+import CourseEnrollmentScreen from './screens/TeacherScreens/CourseEnrollmentScreen'
 
 import AdminLoginScreen  from './screens/AdminScreens/AdminLoginScreen'
 
@@ -63,12 +65,16 @@ const App = () => {
           <Route path='/teacher/classroom/:course_id' element={<TeacherClassroomScreen />} exact />
           <Route path='/teacher/notebook/:notebook_id' element={<NotebookCreatorScreen />} exact />
           <Route path='/teacher/notebooks/:course_id' element={<TeacherNotebooksScreen />} exact />
+         
           <Route path='/teacher/tests/:course_id' element={<TeacherTestsScreen />} exact />
+          <Route path='/teacher/test/:test_id' element={<TestCreatorScreen />} exact />
+         
+          <Route path='/teacher/enrollment/:course_id' element={<CourseEnrollmentScreen />} exact />
+
 
           <Route path='/student/login' element={<StudentLoginScreen />} exact />
           <Route path='/student/signup' element={<StudentSignupScreen />} exact />
 
-          <Route path='/teacher/dashboard' element={<TeacherDashboardScreen />} exact />
 
         </Routes>
 

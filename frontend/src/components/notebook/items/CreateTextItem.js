@@ -86,6 +86,11 @@ export const CreateTextItem = ({notebook_id}) => {
 
     }
 
+    const autoResizeTextArea = (e) => {
+        e.target.style.height = 'auto';
+        e.target.style.height = e.target.scrollHeight + 'px';
+    }
+
     useEffect(() => {
         
 
@@ -118,13 +123,17 @@ export const CreateTextItem = ({notebook_id}) => {
             )}
 
 
-            <InputGroup>
-                <Form.Control as='textarea' placeholder='text' rows={5} value={text} onChange={(e) => setText(e.target.value)} style={{backgroundColor:'white'}}> 
+
+                <Form.Control as='textarea' placeholder='Enter Text' rows={5} value={text} 
+                onChange={(e) => {setText(e.target.value); autoResizeTextArea(e);}} style={{backgroundColor:'white'}}> 
                 </Form.Control>
-                <Badge style={{backgroundColor:'#00bdee', color:'white'}} bg='#ebdc0c'>
-                    <i className="fas fa-check" onClick={()=>addItemRequest()}></i>
-                </Badge>
-            </InputGroup>
+
+
+
+                <Button style={{backgroundColor:'#00bdee', color:'white'}} bg='#ebdc0c' onClick={()=>addItemRequest()}>
+                    <i className="fas fa-check" ></i>
+                </Button>
+
 
             {/* <InputGroup>
             <Form.Control type='text' placeholder='text' value={text} onChange={(e) => setText(e.target.value)} style={{backgroundColor:'white'}}> 

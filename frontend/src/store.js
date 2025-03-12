@@ -13,6 +13,8 @@ import { qandaListReducer, qandaCardListReducer } from './reducers/qandaReducers
 
 import { notebookListReducer,notebookReducer, notebookcardListReducer, notebookItemsReducer } from './reducers/notebookReducers'
 
+import { mcqListReducer, MCQByIdReducer, MCQQuestionsReducer} from './reducers/mcqReducers'
+
 
 const reducer = combineReducers({
     userRegister:userRegisterReducer,  
@@ -27,7 +29,11 @@ const reducer = combineReducers({
     notebookList: notebookListReducer,
     notebookR: notebookReducer,
     notebookcardList: notebookcardListReducer,
-    notebookItems: notebookItemsReducer
+    notebookItems: notebookItemsReducer,
+
+    mcqList: mcqListReducer,
+    MCQById: MCQByIdReducer,
+    MCQQuestions: MCQQuestionsReducer
 
 
 })

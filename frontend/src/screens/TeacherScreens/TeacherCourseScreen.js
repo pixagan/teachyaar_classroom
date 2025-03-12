@@ -389,7 +389,7 @@ export const TeacherCourseScreen = ({}) => {
 
                                             
                                         <OverlayTrigger  placement="top" overlay={profileChannelTooltip}>
-                                        <Link to={`/channelSubscribe/${channel._id}`}>
+                                        <Link to={`/teacher/enrollment/${channel._id}`}>
                                         <Button className="button_gen">
                                             <i className="fas fa-user fa-xs"></i>
                                         </Button>

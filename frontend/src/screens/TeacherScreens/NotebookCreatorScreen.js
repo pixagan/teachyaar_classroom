@@ -71,8 +71,6 @@ export const NotebookCreatorScreen = ({match, history}) => {
 
 
                 <Card style={{margin:'10px', padding:'5px', border:'None'}}>
-                    <Card.Header style={{border:'None', margin:'3px', borderRadius:'10px'}}>   
-
 
                         {notebookcards && notebookcards.map((item, index)=>(
                             <NoteItem citem={item}/>
@@ -82,7 +80,6 @@ export const NotebookCreatorScreen = ({match, history}) => {
         
 
 
-                    </Card.Header>
                 </Card>
 
 
