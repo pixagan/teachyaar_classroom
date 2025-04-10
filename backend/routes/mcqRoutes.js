@@ -32,7 +32,7 @@ import { getTeacherMCQs, updateSolution, getTeacherMCQById,
     addQuestionMcq, updateQuestionMcq, deleteQuestionMcq, createDigitalMCQ,
     GradeAllUnGraded, GradeSubmissionById,  AddManualGradeQuestionById,
     GenerateMCQAnalytics, ComputeMCQAnalytics, AddEquationToQuestion,
-    DeleteImageQuestion, DeleteEquationQuestion,EditEquationQuestion  } from '../controllers/mcqController.js'
+    DeleteImageQuestion, DeleteEquationQuestion,EditEquationQuestion, getTeacherQuestionSolution  } from '../controllers/mcqController.js'
 
 import { protect, teacher, } from '../middleware/authMiddleware.js'
 import { logActivitypre,  logActivitypost} from '../middleware/activityMiddleware.js'
@@ -107,7 +107,7 @@ router.route('/:mcq_id').get(logActivitypre, protect, teacher, getTeacherMCQById
 
 
 
-router.route('/solution/:mcq_id').post(logActivitypre, protect, teacher, updateSolution).get(logActivitypre, protect, teacher, getTeacherMCQSolution);
+router.route('/solution/:question_id').post(logActivitypre, protect, teacher, updateSolution).get(logActivitypre, protect, teacher, getTeacherMCQSolution);
 
 router.route('/start/:mcq_id').post(logActivitypre, startMCQExam);
 
@@ -123,7 +123,7 @@ router.route('/questions/:mcq_id').post(logActivitypre, protect, teacher, addQue
 
 router.route('/questions/:mcq_id/:question_id').put(logActivitypre, protect, teacher, updateQuestionMcq).delete(logActivitypre, protect, teacher, deleteQuestionMcq);
 
-
+router.route('/questions/solution/:question_id').get(logActivitypre, protect, teacher, getTeacherQuestionSolution);
 
 
 router.route('/submissionById/:mcq_id/:submission_id').get(logActivitypre, protect, teacher, getTeacherMCQSubmissionsById);

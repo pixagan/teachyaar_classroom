@@ -32,7 +32,7 @@ const TeacherLoginScreen = ( {} ) => {
         if(userInfo){
 
             if(userInfo.isTeacher) {
-                navigate(`/teacher/dashboard`)
+                navigate(`/teacher/home`)
             }
 
             

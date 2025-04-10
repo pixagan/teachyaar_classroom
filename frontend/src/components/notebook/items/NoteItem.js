@@ -12,6 +12,9 @@ import EquationItem from './EquationItem'
 import CodeItem from './CodeItem'
 import TableItem from './TableItem'
 
+import { Pencil, LetterText, Check, SquareFunction, SquareSigma, Code, Table } from 'lucide-react';
+
+
 // import CreateTextItem from './CreateTextItem'
 
 export const NoteItem = ({citem}) => {
@@ -59,6 +62,8 @@ export const NoteItem = ({citem}) => {
                 ))}
 
             </ListGroup> */}
+
+            <Pencil size={15} color="blue"/>
 
 
 

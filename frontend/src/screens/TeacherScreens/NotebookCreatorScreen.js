@@ -19,6 +19,8 @@ import NoteItem from '../../components/notebook/items/NoteItem'
 
 import { listNotebooksById } from '../../actions/notebookActions'
 
+import { Send, Download } from 'lucide-react';
+
 import {
     BrowserView,
     MobileView,
@@ -66,6 +68,16 @@ export const NotebookCreatorScreen = ({match, history}) => {
             <div style={{minHeight:'100vh', marginTop:'10px', padding:'10px'}}>
 
 
+                <InputGroup>
+                    <Button className="button_gen" style={{padding:'10px', paddingTop:"5px", paddingBottom:"5px"}}>
+                        <Send size={15} color="blue"/>
+                    </Button>
+                    <Button className="button_gen" style={{padding:'10px', paddingTop:"5px", paddingBottom:"5px"}}>
+                        <Download size={15} color="blue"/>
+                    </Button>
+                </InputGroup>
+
+
                  <NotebookPageTitle />
 
 
@@ -76,10 +88,10 @@ export const NotebookCreatorScreen = ({match, history}) => {
                             <NoteItem citem={item}/>
                         ))}
 
+
+
                         <CreateTextItem notebook_id={notebook_id}/>
         
-
-
                 </Card>
 
 

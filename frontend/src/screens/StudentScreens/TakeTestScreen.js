@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Card, Button, ListGroup, Form, OverlayTrigger, Tooltip, InputGroup } from 'react-bootstrap'
 
 
-import QuestionItem from '../../components/tests/QuestionItem'
+import QuestionItemTake from '../../components/tests/QuestionItemTake'
 
 
 import { getMCQById, addQuestion } from '../../actions/mcqActions'
@@ -25,11 +25,10 @@ import {
   } from "react-device-detect";
 
 import { useNavigate,  useParams } from 'react-router-dom';
-import { Send, Download } from 'lucide-react';
 
 
 
-export const TeacherCreatorScreen = ({}) => {
+export const TakeTestScreen = ({}) => {
     
 
     const loading = false;
@@ -108,15 +107,6 @@ export const TeacherCreatorScreen = ({}) => {
 
         <div style={{padding:'10px', margin:'20px', minHeight:'98vh'}}>
           
-          <InputGroup>
-                    <Button className="button_gen" style={{padding:'10px', paddingTop:"5px", paddingBottom:"5px"}}>
-                        <Send size={15} color="blue"/>
-                    </Button>
-                    <Button className="button_gen" style={{padding:'10px', paddingTop:"5px", paddingBottom:"5px"}}>
-                        <Download size={15} color="blue"/>
-                    </Button>
-                </InputGroup>
-
 
             <Card style={{marginBottom:'20px'}}>
 
@@ -126,7 +116,7 @@ export const TeacherCreatorScreen = ({}) => {
                         {testDetail && testDetail.examname && (
                             <p className='h4'>{testDetail.examname}</p>
                         )}
-                        {/* <p className='h4'>{testDetail.examname}</p> */}
+
                     </Card.Title>
                 </Card.Header>
                 
@@ -136,19 +126,15 @@ export const TeacherCreatorScreen = ({}) => {
 
 
             <ListGroup>
-            {questions && questions.map((cquestion, cindex)=>(
-                <ListGroup.Item>
-                    
-                     {/* <p className='h5'>{cquestion.Qtext}</p> */}
+                {questions && questions.map((cquestion, cindex)=>(
+                    <ListGroup.Item>
+                        
+                        {/* <p className='h5'>{cquestion.Qtext}</p> */}
 
-                     <QuestionItem question={cquestion} mcq_id={test_id} index={cindex+1}/>
-                    
-                </ListGroup.Item>
-            ))}
-
-            <ListGroup.Item style={{border:'None'}}>
-                <Button className='button_gen' onClick={()=>addQuestionRequest()}>Add Question</Button>
-            </ListGroup.Item>
+                        <QuestionItemTake question={cquestion} mcq_id={test_id} index={cindex+1}/>
+                        
+                    </ListGroup.Item>
+                ))}
 
             </ListGroup>
            
@@ -161,4 +147,4 @@ export const TeacherCreatorScreen = ({}) => {
 }
 
 
-export default TeacherCreatorScreen
+export default TakeTestScreen

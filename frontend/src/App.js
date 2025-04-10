@@ -13,9 +13,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import HomeScreen from './screens/HomeScreen'
 
-import StudentLoginScreen from './screens/StudentScreens/StudentLoginScreen'
-import StudentSignupScreen from './screens/StudentScreens/StudentSignupScreen'
-
 import TeacherLoginScreen from './screens/TeacherScreens/TeacherLoginScreen'
 import TeacherSignupScreen from './screens/TeacherScreens/TeacherSignupScreen'
 import TeacherHomeScreen from './screens/TeacherScreens/TeacherHomeScreen'
@@ -28,6 +25,15 @@ import TeacherTestsScreen from './screens/TeacherScreens/TeacherTestsScreen'
 import TeacherNotebooksScreen from './screens/TeacherScreens/TeacherNotebooksScreen'
 import TestCreatorScreen from './screens/TeacherScreens/TestCreatorScreen'
 import CourseEnrollmentScreen from './screens/TeacherScreens/CourseEnrollmentScreen'
+
+
+
+import StudentLoginScreen from './screens/StudentScreens/StudentLoginScreen'
+import StudentSignupScreen from './screens/StudentScreens/StudentSignupScreen'
+import StudentHomeScreen from './screens/StudentScreens/StudentHomeScreen'
+import StudentClassroomScreen from './screens/StudentScreens/StudentClassroomScreen'
+import NotebookViewScreen from './screens/StudentScreens/NotebookViewScreen'
+import TakeTestScreen from './screens/StudentScreens/TakeTestScreen'
 
 import AdminLoginScreen  from './screens/AdminScreens/AdminLoginScreen'
 
@@ -72,9 +78,13 @@ const App = () => {
           <Route path='/teacher/enrollment/:course_id' element={<CourseEnrollmentScreen />} exact />
 
 
-          <Route path='/student/login' element={<StudentLoginScreen />} exact />
+          <Route path='/student/home' element={<StudentHomeScreen />} exact />
           <Route path='/student/signup' element={<StudentSignupScreen />} exact />
-
+          <Route path='/student/home' element={<StudentSignupScreen />} exact />
+          <Route path='/student/classroom/:course_id' element={<StudentClassroomScreen />} exact />
+          <Route path='/student/notebooks/:notebook_id' element={<NotebookViewScreen />} exact />
+          <Route path='/student/tests/:test_id' element={<TakeTestScreen />} exact />
+    
 
         </Routes>
 

@@ -5,7 +5,7 @@
 import React , {useState, useEffect, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Card, Button, ListGroup, Form, OverlayTrigger, Tooltip, InputGroup } from 'react-bootstrap'
+import { Row, Col, Card, Button, ListGroup, Form, OverlayTrigger, Tooltip, InputGroup, Table } from 'react-bootstrap'
 
 
 import {useInterval} from '../../hooks/useInterval'
@@ -72,6 +72,10 @@ export const CourseEnrollmentScreen = ({}) => {
     ]
 
 
+    const addStudentToClass = () => {
+
+    }
+
 
     useEffect(() => {
 
@@ -91,21 +95,79 @@ export const CourseEnrollmentScreen = ({}) => {
 
             <p className='h3'>Enrollment</p>
 
+            {/* <Card>
+                <Card.Header>
+
+                <Form onSubmit={submitHandler}>
+
+                    <Form.Group controlId='question'>
+                        <Form.Control as='textarea' placeholder='Enter Message / Doubt' rows={3} value={question} onChange={(e) => {setQuestion(e.target.value); autoResizeTextArea(e)}} onKeyDown={autoResizeTextArea}> 
+                        </Form.Control>
+                    </Form.Group>
+
+                    <Row>
+                    <Col>
+
+
+                        <Form.Group controlId="studentTeacherSelect">
+                        <Form.Label>Send to</Form.Label>
+                        <Form.Control as="select"  onChange={(e) => setMessagetype(e.target.value)} >
+                            <option>Class</option>
+                            <option>Teacher only</option>
+                        </Form.Control>
+                    </Form.Group>
+
+
+                    </Col>
+
+                    <Col>
+
+
+
+                    <br/>
+                    <Button className="button_gen" type='submit' variant='primary'>
+                        Add
+                    </Button>
+
+                    </Col>
+
+                    </Row>
+
+
+                    </Form>
+
+
+                </Card.Header>
+
+
+            </Card> */}
+
+
+
             <Button className='button_gen' style={{marginBottom:'20px'}} >Check Enrollment</Button>
 
-            <ListGroup> 
+
+
+            <Table>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Student Email</th>
+                    <th>Enrollment Date</th>
+                    <th>Enrollment Status</th>
+                </tr>
 
                 {enrollments && enrollments.map((enrollment, index)=>(
-                    <ListGroup.Item key={index}>
-                        <p className='h5'>{enrollment.student_name}</p>
-                        <p className='h5'>{enrollment.student_email}</p>
-                        <p className='h5'>{enrollment.enrollment_date}</p>
-                        <p className='h5'>{enrollment.enrollment_status}</p>
-                    </ListGroup.Item>
+                    <tr>
+                        <td className='h5'>{enrollment.student_name}</td>
+                        <td className='h5'>{enrollment.student_email}</td>
+                        <td className='h5'>{enrollment.enrollment_date}</td>
+                        <td className='h5'>{enrollment.enrollment_status}</td>
+                    </tr>
                 ))}
 
-            </ListGroup>
+            </Table>
 
+ 
       
 
         </div>

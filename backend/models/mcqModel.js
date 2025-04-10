@@ -99,6 +99,32 @@ const Question = mongoose.model('Question', QuestionSchema);
 
 
 
+const questionSolutionSchema = mongoose.Schema({
+    instructor:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
+    question_id:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
+    solutionText:[],
+    solutionMCQ:{type:String}
+
+}, {
+    timestamps: true
+})
+
+const Questionsol = mongoose.model('Questionsol', questionSolutionSchema);
+
+
+
+
+
+
+
 const mcqSolutionSchema = mongoose.Schema({
     instructor:{
         type: mongoose.Schema.Types.ObjectId,
@@ -367,6 +393,6 @@ const mcqsubmissionSchema = mongoose.Schema({
 
 const Mcqsubmission = mongoose.model('Mcqsubmission', mcqsubmissionSchema);
 
-export default Mcqsubmission;
+//export default Mcqsubmission;
 
-export { Mcq, Mcqsol, mcqSchema, Question, Mcqanalytics,Mcqsubmission};
+export { Mcq, Mcqsol, mcqSchema, Question, Questionsol, Mcqanalytics,Mcqsubmission};

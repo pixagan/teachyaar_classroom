@@ -4,7 +4,7 @@
 
 import React , {useState, useEffect,  Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { useNavigate } from 'react-router-dom'
 import { Row, Col, Card, Button, Form,  OverlayTrigger, Tooltip } from 'react-bootstrap'
 
 
@@ -24,6 +24,8 @@ import QandaForm from '../qanda/QandaForm'
 import QandaItem from '../qanda/QandaItem'
 
 
+import { Trash2, SendHorizontal, MessageSquareText } from 'lucide-react';
+
 
 import {listLectureCardNotes, addLectureCardNotes, addTagStudyCard, postCard, deleteCard} from '../../actions/cardActions'
 
@@ -32,9 +34,10 @@ import {listQPostsCard} from '../../actions/qandaActions'
 import DateFormatted from '../utils/DateFormatted'
 
 
-export const TYCard = ({card, channel_id, qandaboard_id}) => {
+export const TYCard = ({card, channel_id, qandaboard_id, updateToggleInteraction, usermode}) => {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const [tagC, setTagC ] = useState('')
 
@@ -81,6 +84,9 @@ export const TYCard = ({card, channel_id, qandaboard_id}) => {
         setDoubtViewtoggle(doubtViewtoggle => !doubtViewtoggle)
 
 
+
+        updateToggleInteraction()
+
         setStudynoteViewtoggle(false)
 
     }
@@ -105,6 +111,33 @@ export const TYCard = ({card, channel_id, qandaboard_id}) => {
         
     }, [])
 
+
+    const navigateTo = (path) => {
+
+        if(usermode=='teacher'){
+            if(path=='notes'){
+                navigate(`/teacher/notebook/${card.notebook}`)
+            }
+            if(path=='test'){
+                navigate(`/teacher/test/${card.test}`)
+            }
+            if(path=='live'){
+                navigate(`/teacher/live/${card.live}`)
+            }
+        }
+
+        if(usermode=='student'){
+            if(path=='notes'){
+                navigate(`/student/notebook/${card.notebook}`)
+            }
+            if(path=='test'){
+                navigate(`/student/test/${card.test}`)
+            }
+            if(path=='live'){
+                navigate(`/student/live/${card.live}`)
+            }
+        }
+    }
 
 
 
@@ -192,6 +225,8 @@ export const TYCard = ({card, channel_id, qandaboard_id}) => {
         </Tooltip>
     );
 
+    
+
 
 
     return (
@@ -225,15 +260,16 @@ export const TYCard = ({card, channel_id, qandaboard_id}) => {
                         ) : (
                             <OverlayTrigger  placement="top" overlay={postTooltip}>
                             <Button className="button_gen" onClick={()=>dispatch(postCard(card.channel, card._id))}>
-                                POST
+                               
+                                <SendHorizontal color="blue" size={20} />
                             </Button> 
                             </OverlayTrigger>
                         )} 
 
 
                         <OverlayTrigger  placement="top" overlay={deleteTooltip}>
-                        <Button variant="danger" onClick={()=>deleteCardConfirm(channel_id, card._id)}>
-                            <i className="fas fa-times fa-xs"></i>
+                        <Button variant="danger" onClick={()=>deleteCardConfirm(channel_id, card._id)} style={{borderRadius:'10%'}}>
+                            <Trash2 color="blue" size={20} />
                         </Button>
                         </OverlayTrigger>
 
@@ -254,10 +290,40 @@ export const TYCard = ({card, channel_id, qandaboard_id}) => {
 
                     <Card.Body>
 
+
+                    {card.type=="Notes" && (
+                        
+                        <Card onClick={()=>navigateTo('notes')}>
+                        <p>Notes</p>
+                        </Card>
+                        
+                    )}
+
+                    {card.type=="Test" && (
+                        <Card onClick={()=>navigateTo('test')}>  
+                            <p>Test</p>
+                        </Card>
+                        
+                    )}
+
+                    {card.type=="Live" && (
+                        <Card onClick={()=>navigateTo('live')}>
+                            <p>Live</p>
+                        </Card>
+                        
+                    )}
+
+                    {card.type=="Announcements" && (
+                        <Card>
+                            <p>Announcements</p>
+                        </Card>
+
+                    )}
+
                    
 
 
-
+                    {/* 
                     {card.type=="Notes" && (
                         <NotesItem channel_id={channel_id} card={card} cardedit={cardMode} />
                     )}
@@ -273,24 +339,22 @@ export const TYCard = ({card, channel_id, qandaboard_id}) => {
                     )}
 
 
-                    {/* {card.type=="Study" && (
-                        <StudyCardItem channel_id={channel_id} card={card} cardedit={cardMode}/>
-                    )} */}
-
                     {card.type=="Announcement" && (
                         <AnnouncementItem channel_id={channel_id} card={card} cardedit={cardMode}/>
-                    )}
+                    )} */}
 
                    
-                
-
+            
 
                     {userInfo && !userInfo.isAdmin && (
                     <Row>
                         <Col>
                         
                             <OverlayTrigger  placement="top" overlay={interactTooltip}>
-                            <Button className="button_gen" onClick={toggledoubtView}>Interact</Button>
+                            <Button className="button_gen" onClick={toggledoubtView}>
+                                
+                                <MessageSquareText color="blue" size={20} />
+                                </Button>
                             </OverlayTrigger>
 
                             {/* <OverlayTrigger  placement="top" overlay={privatenotesTooltip}>
@@ -305,7 +369,10 @@ export const TYCard = ({card, channel_id, qandaboard_id}) => {
                     <Row>
                         <Col>
                         <OverlayTrigger  placement="top" overlay={interactTooltip}>
-                            <Button className="button_gen" onClick={toggledoubtView}>Interact</Button>
+                            <Button className="button_gen" onClick={toggledoubtView}>
+                              
+                                <MessageSquareText color="blue" size={20} />
+                            </Button>
                         </OverlayTrigger>
                         </Col>
                     </Row>
@@ -317,7 +384,7 @@ export const TYCard = ({card, channel_id, qandaboard_id}) => {
 
 
                     
-                    {userInfo && !userInfo.isAdmin && studynoteViewtoggle && (
+                    {/* {userInfo && !userInfo.isAdmin && studynoteViewtoggle && (
 
                         <Fragment>
                           
@@ -353,10 +420,10 @@ export const TYCard = ({card, channel_id, qandaboard_id}) => {
                           
                         </Fragment>
 
-                    )}
+                    )} */}
                     
 
-                    {doubtViewtoggle && (
+                    {/* {doubtViewtoggle && (
 
                         <Fragment>
 
@@ -376,7 +443,7 @@ export const TYCard = ({card, channel_id, qandaboard_id}) => {
 
                         </Fragment>
 
-                    )}
+                    )} */}
 
 
 

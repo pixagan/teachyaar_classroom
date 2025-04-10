@@ -11,6 +11,7 @@
     "@xyflow/react": "^12.3.6",
     "axios": "^1.7.9",
     "file-saver": "^2.0.5",
+    "lucide-react": "^0.487.0",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",
     "react-device-detect": "^2.2.3",

@@ -8,7 +8,7 @@ import User from '../models/userModel.js'
 import Appmetrics from '../models/appmetricsModel.js'
 
 import {Mcq} from '../models/mcqModel.js'
-import {Mcqsol, Question, Mcqanalytics, Mcqsubmission} from '../models/mcqModel.js'
+import {Mcqsol, Question, Mcqanalytics, Mcqsubmission, Questionsol} from '../models/mcqModel.js'
 
 import moment from 'moment-timezone'
 
@@ -490,40 +490,78 @@ const updateSolution = asyncHandler(async(req, res) => {
 
     const user = await User.findById(req.user._id)
 
-    const mcq_id = req.params.mcq_id
+    const question_id = req.params.question_id
+    const question = await Question.findById(question_id)
 
-    const mcq = await Mcq.findById(mcq_id)
-
-    const {solution, answeredQ} = req.body
+    const {solution} = req.body
 
     console.log('Solution ', solution)
 
     //check if solution already exists if so overwrite else create new
 
-    const existingMcqsol = await Mcqsol.findOne({mcq:mcq_id})
+    const existingsol = await Questionsol.findOne({question_id:question_id})
 
-    if(existingMcqsol){
-        existingMcqsol.solutions = solution
-        const updatedMcqsol = await existingMcqsol.save()
-        return res.json({'solution':updatedMcqsol, 'examid':mcq_id})
+    if(existingsol){
+
+        if(question.Qtype == 'MCQ'){
+            existingsol.solutionMCQ = solution
+        }else{
+            existingsol.solutionText = solution
+        }
+
+        const updatedsol = await existingsol.save()
+        return res.json({'solution':updatedsol, 'mcq_id':mcq_id})
+   
     }else{
 
-    const newMcqsol = await Mcqsol.create({
+    const newsol = await new Questionsol({
         instructor: user._id,
-        mcq: mcq_id,
-        numQuestions: mcq.numQuestions,
-        solutions: []
+        question_id: question._id,
+        solutionText:[],
+        solutionMCQ:' '
     })
 
+    if(question.Qtype == 'MCQ'){
+        newsol.solutionMCQ = solution
+    }else{
+        newsol.solutionText = solution
+    }
 
-    newMcqsol.solutions = solution
-    // newMcqsol.solutions = solution
 
-    const createdMcqsol = newMcqsol.save()
+    const createdMcqsol = newsol.save()
 
     //sol.solution
 
-    res.json({'solution':createdMcqsol, 'examid':mcq_id})
+    res.json({'solution':createdMcqsol, 'mcq_id':mcq_id})
+
+    }
+
+
+})
+
+
+// @desc Fetch one Exam by it's ID
+// @route GET /api/products
+// @access Public route
+const getTeacherQuestionSolution = asyncHandler(async(req, res) => {
+    
+
+    //const user = await User.findById(req.user._id)
+
+    const question_id = req.params.question_id
+
+    const qsol = await Questionsol.findOne({question_id:req.params.question_id})
+
+    if(qsol){
+
+        console.log(qsol)
+
+        res.json({'solution':qsol, 'question_id':question_id})
+
+    }else{
+
+        res.status(404)
+        throw new Error('Question solution not found')
 
     }
 
@@ -1634,6 +1672,7 @@ export {
     updateQuestionMcq,
     deleteQuestionMcq,
     createDigitalMCQ,
+    getTeacherQuestionSolution,
 
     GradeAllUnGraded,
     GradeSubmissionById,

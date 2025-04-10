@@ -33,7 +33,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-export const TeacherDashboardScreen = ({}) => {
+export const StudentDashboardScreen = ({}) => {
     
 
     const loading = false;
@@ -117,11 +117,6 @@ export const TeacherDashboardScreen = ({}) => {
     const toggledoubtView = () => {
         setDoubtViewtoggle(doubtViewtoggle => !doubtViewtoggle)
     }
-
-    useInterval(async ()=>{
-        //console.log("Polling server for updates")
-        //dispatch(updateChannelRT(selectedChannel))
-    }, 20000)
 
 
 
@@ -296,7 +291,7 @@ export const TeacherDashboardScreen = ({}) => {
                                    
                                     <OverlayTrigger  placement="top" overlay={createChannelTooltip}>
                                     <Button className="button_gen" type='submit' variant='primary'>
-                                        Create
+                                        Enroll
                                     </Button>
                                     </OverlayTrigger>
                                     
@@ -381,7 +376,7 @@ export const TeacherDashboardScreen = ({}) => {
                                        
 
                                         <OverlayTrigger  placement="top" overlay={selectChannelTooltip}>    
-                                        <Link to={`/teacher/classroom/${channel._id}`}>
+                                        <Link to={`/student/classroom/${channel._id}`}>
                                         <Button className="button_gen" onClick={()=>selectChannel(channel._id, channel.name, channel.channelQandaBoard)}>
                                             
                                             <Newspaper color="blue" size={20} />
@@ -389,7 +384,7 @@ export const TeacherDashboardScreen = ({}) => {
                                         </Link>
                                         </OverlayTrigger>
 
-                                        <Link to={`/teacher/notebooks/${channel._id}`}>
+                                        {/* <Link to={`/teacher/notebooks/${channel._id}`}>
                                         <Button className="button_gen">
                                             <NotebookPen color="blue" size={20} />
                                         </Button>
@@ -411,7 +406,7 @@ export const TeacherDashboardScreen = ({}) => {
                                         </Link>
                                         </OverlayTrigger>
 
-                               
+                                */}
 
 
 
@@ -443,4 +438,4 @@ export const TeacherDashboardScreen = ({}) => {
 }
 
 
-export default TeacherDashboardScreen
+export default StudentDashboardScreen

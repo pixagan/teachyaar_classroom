@@ -8,6 +8,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 //import MathJax from 'react-mathjax';
 
+import { LetterText, Check, SquareFunction, SquareSigma, Code, Table } from 'lucide-react';
+
+
 import {addNotebookItem} from '../../../actions/notebookActions'
 
 export const CreateTextItem = ({notebook_id}) => {
@@ -123,6 +126,24 @@ export const CreateTextItem = ({notebook_id}) => {
             )}
 
 
+                <Card style={{padding:'10px'}}>
+
+                    <InputGroup>
+                        <Button className="button_gen" style={{padding:'10px', paddingTop:"5px", paddingBottom:"5px"}} onClick={()=>setItemType('text')}>
+                            <LetterText size={15} color="blue"/>
+                       
+                        </Button>
+                        <Button className="button_gen" style={{padding:'10px', paddingTop:"5px", paddingBottom:"5px"}} onClick={()=>setItemType('text')}>
+                      
+                            <SquareSigma size={15} color="blue"/>
+                        </Button>
+                        <Button className="button_gen" style={{padding:'10px', paddingTop:"5px", paddingBottom:"5px"}} onClick={()=>setItemType('text')}>
+                            <Code size={15} color="blue"/>
+                        </Button>
+                        <Button className="button_gen" style={{padding:'10px', paddingTop:"5px", paddingBottom:"5px"}} onClick={()=>setItemType('text')}>
+                            <Table size={15} color="blue"/>
+                        </Button>
+                    </InputGroup>
 
                 <Form.Control as='textarea' placeholder='Enter Text' rows={5} value={text} 
                 onChange={(e) => {setText(e.target.value); autoResizeTextArea(e);}} style={{backgroundColor:'white'}}> 
@@ -130,9 +151,15 @@ export const CreateTextItem = ({notebook_id}) => {
 
 
 
-                <Button style={{backgroundColor:'#00bdee', color:'white'}} bg='#ebdc0c' onClick={()=>addItemRequest()}>
-                    <i className="fas fa-check" ></i>
+                <Button style={{backgroundColor:'#00bdee', color:'white', width:'10vw', borderRadius:'10px', padding:"5px"}} bg='#ebdc0c' onClick={()=>addItemRequest()}>
+                    <Check size={30} color="white"/>
+                    
                 </Button>
+
+                </Card>
+
+
+
 
 
             {/* <InputGroup>

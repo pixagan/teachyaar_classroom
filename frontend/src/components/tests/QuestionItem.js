@@ -10,6 +10,9 @@ import Resizer from "react-image-file-resizer";
 
 import Message from '../../components/utils/Message'
 
+import { Pencil, Trash2, Tags, Pen } from 'lucide-react';
+
+
 import axios from 'axios'
 // import moment from 'moment-timezone'
 
@@ -18,7 +21,7 @@ import axios from 'axios'
 
 //import {deleteImageMCQ} from '../../actions/mcqActions'
 
-import {updateMCQQuestion, deleteMCQQuestion} from '../../actions/mcqActions'
+import {updateMCQQuestion, deleteMCQQuestion, submitMCQSolution} from '../../actions/mcqActions'
 
 
 import {MCQ_EDIT_QUESTION} from '../../constants/mcqConstants'
@@ -58,6 +61,20 @@ export const QuestionItem = ({question, mcq_id, index}) => {
 
     const [eqImView, setEqImView] = useState(null)
 
+
+    const [selectedAnswer, setSelectedAnswer] = useState('')
+    const [isAnswer, setIsAnswer] = useState(false)
+
+    const setAnswer = (answer_in) => {
+        setSelectedAnswer(answer_in)
+        setIsAnswer(true)
+    }
+
+    const submitAnswerRequest = () => {
+        dispatch(submitMCQSolution(question._id, selectedAnswer))
+    }
+
+
     const toggleEqImView = (mode_in) => {
         if(mode_in == eqImView){
             setEqImView(null)
@@ -66,6 +83,26 @@ export const QuestionItem = ({question, mcq_id, index}) => {
         }
     }
 
+
+    const getQuestionSolution = async () => {
+
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.get(`/api/mcq/questions/solution/${question._id}`, config)
+        console.log(data)
+
+        if(data.question_id && data.solution){
+            if(data.question_id == question._id){
+                setSelectedAnswer(data.solution.solutionMCQ)
+            }
+        }
+    }
 
 
     useEffect(() => {
@@ -76,6 +113,8 @@ export const QuestionItem = ({question, mcq_id, index}) => {
         setExamType(question.Qtype)
 
         setQuestionText(question.Qtext)
+
+        //getQuestionSolution()
 
         
 
@@ -306,9 +345,21 @@ export const QuestionItem = ({question, mcq_id, index}) => {
                 <Card.Header style={{backgroundColor:'white', borderBottom:'None', marginBottom:0, paddingBottom:0}}>
 
                     <InputGroup style={{alignItems:'right'}}>
-                    <Button className="button_gen" onClick={()=>toggleMode('edit')} style={{margin:'2px'}}> <i className='fas fa-edit'>  </i></Button>
-                    <Button className="button_gen" onClick={deleteQuestion} style={{margin:'2px'}}> <i className='fas fa-trash'>  </i> </Button>
-                    <Button className="button_gen" style={{margin:'2px'}} > <i className='fas fa-tags'>  </i> </Button>
+                    <Button className="button_gen" onClick={()=>toggleMode('edit')} style={{margin:'2px'}}>
+                         
+                         <Pencil color="blue" size={20} />
+                    </Button>
+                    <Button className="button_gen" onClick={deleteQuestion} style={{margin:'2px'}}> 
+                       
+                        <Trash2 color="blue" size={20}/>
+                     </Button>
+                    <Button className="button_gen" style={{margin:'2px'}} > 
+                        <Tags color="blue" size={20} />
+                      
+                    </Button>
+                    <Button className="button_gen" onClick={()=>toggleMode('answer')} style={{margin:'2px', color:'blue'}} > 
+                        A
+                    </Button>
                     </InputGroup>
 
                     <Row>
@@ -396,8 +447,14 @@ export const QuestionItem = ({question, mcq_id, index}) => {
 
             
                     <InputGroup style={{alignItems:'right'}}>
-                    <Button className="button_gen" onClick={()=>toggleMode('edit')}> <i className='fas fa-edit'>  </i></Button>
-                    <Button className="button_gen" onClick={deleteQuestion}> <i className='fas fa-trash'>  </i> </Button>
+                        <Button className="button_gen" onClick={()=>toggleMode('edit')}> 
+                           
+                            <Pencil size={20} color="blue"/>
+                        </Button>
+                        <Button className="button_gen" onClick={deleteQuestion}> 
+                            
+                            <Trash2 size={20} color="blue"/>
+                        </Button>
                     </InputGroup>
 
 
@@ -593,7 +650,61 @@ export const QuestionItem = ({question, mcq_id, index}) => {
 
 
 
+                {mode == 'answer' && (
+                    <Card style={{border:'None'}}>
+                        <Card.Body style={{padding:'10px'}}>
 
+                        <p className='h4'>Select Answer</p>
+
+                        <span className='h5' style={{backgroundColor:'white'}}> {index}) {question.Qtext} </span>
+
+                        {question.Qtype == 'MCQ' && (
+                        <Fragment >
+                            <Row>
+                                <Col style={{backgroundColor: selectedAnswer == '1'? '#d3fa78' :'white', padding:'10px'}} onClick={()=>setAnswer('1')} >
+                                    {question.options[1] && question.options[1]!==undefined && (
+                                        <span> a) {question.options[1]} </span>
+                                    )}
+                                </Col>
+
+                                <Col style={{backgroundColor: selectedAnswer == '2'? '#d3fa78' :'white', padding:'10px'}} onClick={()=>setAnswer('2')}>
+                                    {question.options[2] && question.options[2]!==undefined && (
+                                        <span> b) {question.options[2]} </span>
+                                    )}
+
+                                </Col>
+                            </Row>
+
+                            <Row>
+
+                                 <Col style={{backgroundColor: selectedAnswer == '3'? '#d3fa78' :'white', padding:'10px'}} onClick={()=>setAnswer('3')}>
+                                    {question.options[3] && question.options[3]!==undefined && (
+                                        <span> c) {question.options[3]} </span>
+                                    )}
+
+
+                                </Col>
+
+                                <Col style={{backgroundColor: selectedAnswer == '4'? '#d3fa78' :'white', padding:'10px'}} onClick={()=>setAnswer('4')}>
+
+                                     {question.options[4] && question.options[4]!==undefined && (
+                                        <span> d) {question.options[4]} </span>
+                                    )}
+
+                                </Col>
+
+                            </Row>
+                        </Fragment>
+                    )}
+
+
+                        <Button className="button_gen" onClick={()=>{submitAnswerRequest(); toggleMode('view')}}> Done </Button>
+                        
+                        <Button className="button_gen" onClick={()=>toggleMode('view')}> Cancel </Button>
+
+                        </Card.Body>
+                    </Card>
+                )}
 
 
 

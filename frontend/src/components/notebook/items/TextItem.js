@@ -55,7 +55,7 @@ export const TextItem = ({item_in, item_id}) => {
             {viewMode == 'view' ? (
 
                 <>
-                    <p>{item_in.text}</p>
+                    <p className='h5'>{item_in.text}</p>
 
                     
                 

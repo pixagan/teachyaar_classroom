@@ -11,6 +11,7 @@ import Loader from '../../components/utils/Loader'
 import TYCard from '../../components/cards/TYCard'
 import QandaForm from '../../components/qanda/QandaForm'
 import QandaItem from '../../components/qanda/QandaItem'
+import SocialCardCreator from '../../components/cards/SocialCardCreator'
 
 import {listChannels, createChannel, deleteChannel, updateChannelRT, enrollRequestChannel, unsubscribeChannel, listChannelDetail} from '../../actions/channelActions'
 import {listTYCards, createTYCard} from '../../actions/cardActions'
@@ -18,6 +19,11 @@ import {listQPosts} from '../../actions/qandaActions'
 
 import {useInterval} from '../../hooks/useInterval'
 import { useHistory, useNavigate, useParams } from 'react-router-dom'
+
+
+import { Notebook, Bell, ClipboardList, Video, MessageSquareText } from 'lucide-react';
+
+
 
 import {
     BrowserView,
@@ -49,6 +55,10 @@ export const TeacherClassroomScreen = ({}) => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
+    const [toggleInteraction, setToggleInteraction] = useState(false)
+    const updateToggleInteraction = () => {
+        setToggleInteraction(toggleInteraction => !toggleInteraction)
+    }
 
     // const channelList = useSelector(state => state.channelList);
     // const { loading:loadingC, error:errorC, channels } = channelList;
@@ -296,13 +306,10 @@ export const TeacherClassroomScreen = ({}) => {
         <>
           
 
-            { loading ? (<Loader />) : error ? (<Message variant='danger'>{error}</Message>) : 
-            (   
-                <>
 
-                <div  className="body">
+                <Row>
 
-                    <div className="content">
+                    <Col style={{padding:'10px', margin:'10px', maxHeight:'90vh', overflowY:'scroll'}}>
                             <Row>
                                 <Col>
                                 <p></p>
@@ -334,30 +341,34 @@ export const TeacherClassroomScreen = ({}) => {
                              </Row>
 
 
-                        {!selectedChannelName && (
-                            <Message variant='info'>{"Select a class to show the cards "}</Message>
-                        )}
-
-                        {selectedChannel && channelCS && channelCS.classIsLive!=undefined && channelCS.classIsLive==true && (
-                            <Message variant='info'>{"Teacher is currently taking a live lecture "}</Message>
-                        )}
-                            
-                      
-
-           
-                            <Row>
+                                <SocialCardCreator channel_id={selectedChannel} board_id={selectedChannelQandaBoard} card_id={null} updateToggleInteraction={updateToggleInteraction}/>
 
 
 
-                            <Col>
+
+                            {/* <Row>
+
+                            <Col style={{padding:'10px'}}>
 
                                 {userInfo && userInfo.isTeacher && (
 
                                 <Card style={{border:'None', padding:'10px'}}>
                                     <InputGroup>
-                                        <Button className="button_gen" onClick={()=>addCard('Notes')}><i className="fa fa-file-text"></i></Button>
-                                        <Button className="button_gen" onClick={()=>addCard('Exam')}><i className="fa fa-pencil-square"></i></Button>
-                                        <Button className="button_gen" onClick={()=>addCard('Live')}><i className="fa fa-video"></i></Button>
+                                    <Button className="button_gen" onClick={()=>addCard('Announcement')}>
+                                        <Bell color="blue" size={20} />
+                                        </Button>
+                                        <Button className="button_gen" onClick={()=>addCard('Notes')}>
+                                            <Notebook color="blue" size={20} />
+                                        </Button>
+                                        <Button className="button_gen" onClick={()=>addCard('Exam')}>
+                                            <ClipboardList color="blue" size={20} />
+                                        </Button>
+                                        <Button className="button_gen" onClick={()=>addCard('Live')}>
+                                            <Video color="blue" size={20} />
+                                        </Button>
+                                        <Button className="button_gen" onClick={()=>setToggleInteraction(!toggleInteraction)}>
+                                            <MessageSquareText color="blue" size={20} />
+                                        </Button>
                                     </InputGroup>
                                    
 
@@ -366,26 +377,18 @@ export const TeacherClassroomScreen = ({}) => {
 
                                 )}
 
-                            
-
                             </Col>
 
-
-                            </Row>
+                            </Row> */}
 
                    
 
 
 
-
-                       
-
-                    
-
                         {tycards && tycards.map((card) => (
 
                             <Fragment>
-                                <TYCard card={card} channel_id={selectedChannel} qandaboard_id={selectedChannelQandaBoard}/>
+                                <TYCard card={card} channel_id={selectedChannel} qandaboard_id={selectedChannelQandaBoard} updateToggleInteraction={updateToggleInteraction} usermode='teacher'/>
                                 <br />
                             </Fragment>
 
@@ -394,37 +397,37 @@ export const TeacherClassroomScreen = ({}) => {
 
 
 
-                    </div>
+                    </Col >
+
+                        {toggleInteraction && (
+
+                            <Col style={{borderLeft:'1px solid #000', padding:'10px', maxWidth:'40%', maxHeight:'90vh', overflowY:'scroll'}}>
+                                                    
+                            <div><span className='h5'>Interaction Wall : </span> <span>{selectedChannelName} </span></div>
+
+                            <QandaForm board_id={selectedChannelQandaBoard} channel_id={selectedChannel}/>
 
 
 
-                    <div className="content_right">
-                         <div><span className='h5'>Interaction Wall : </span> <span>{selectedChannelName} </span></div>
-                         
-                        <QandaForm board_id={selectedChannelQandaBoard} channel_id={selectedChannel}/>
+                            {qandalist && qandalist.map((qanda) => (
 
-                     
-
-                        {qandalist && qandalist.map((qanda) => (
-
-                        <Fragment>
-                            <QandaItem channel_id={selectedChannel} qandaboard_id={selectedChannelQandaBoard} qanda={qanda}/>
-                          
-                        </Fragment>
+                            <Fragment>
+                                <QandaItem channel_id={selectedChannel} qandaboard_id={selectedChannelQandaBoard} qanda={qanda} setToggleInteraction={setToggleInteraction}/>
+                            
+                            </Fragment>
 
 
-                        ))}
+                            ))}
 
-                    </div>
+                            </Col>
+                        )}
 
 
 
-                </div>
 
-            
-                </>
+                </Row>
 
-            )}
+
                 
   
 

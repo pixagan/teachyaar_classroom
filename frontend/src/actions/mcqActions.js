@@ -360,7 +360,7 @@ export const deleteMCQQuestion = ( mcq_id, question_id ) => async (dispatch, get
 
 
 
-export const submitMCQSolution = ( solution, answeredQ, mcq_id ) => async (dispatch, getState) => {
+export const submitMCQSolution = ( question_id, solution ) => async (dispatch, getState) => {
     try{
         // dispatch({
         //     type: STUDYCARD_CREATE_REQUEST
@@ -377,9 +377,9 @@ export const submitMCQSolution = ( solution, answeredQ, mcq_id ) => async (dispa
         }
 
 
-        console.log(solution, answeredQ, mcq_id)
+        console.log(question_id, solution)
 
-        const { data } = await axios.post(`/api/mcq/solution/${mcq_id}`,  {solution, answeredQ}, config)
+        const { data } = await axios.post(`/api/mcq/solution/${question_id}`,  {solution}, config)
 
         dispatch({
             type: MCQ_SUBMIT_SOLUTION,

@@ -27,7 +27,10 @@ const QandaForm = ({channel_id, board_id, card_id} ) => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-
+    const autoResizeTextArea = (e) => {
+        e.target.style.height = 'auto';
+        e.target.style.height = e.target.scrollHeight + 'px';
+    }
 
 
 
@@ -55,14 +58,13 @@ const QandaForm = ({channel_id, board_id, card_id} ) => {
             <Card>
 
 
-                {message && <Message variant='danger'>{message}</Message> }
+                {/* {message && <Message variant='danger'>{message}</Message> }
                 {error && <Message variant='danger'>{error}</Message> }
-                {loading && <Loader />}
+                {loading && <Loader />} */}
                 <Form onSubmit={submitHandler}>
 
                     <Form.Group controlId='question'>
-                        {/* <Form.Label>Question</Form.Label> */}
-                        <Form.Control type='text' placeholder='Enter Message / Doubt' value={question} onChange={(e) => setQuestion(e.target.value)}> 
+                        <Form.Control as='textarea' placeholder='Enter Message / Doubt' rows={3} value={question} onChange={(e) => {setQuestion(e.target.value); autoResizeTextArea(e)}} onKeyDown={autoResizeTextArea}> 
                         </Form.Control>
                     </Form.Group>
 
@@ -72,15 +74,12 @@ const QandaForm = ({channel_id, board_id, card_id} ) => {
                     <Col>
 
                     {userInfo && userInfo.isTeacher ? (
-                        // <Button>To Student Only</Button>
-
                         <Fragment>
 
                         <Form.Group controlId="studentTeacherSelect">
                         <Form.Label>Send To</Form.Label>
                         <Form.Control as="select"  onChange={(e) => setMessagetype(e.target.value)} >
                             <option>Class</option>
-                            {/* <option>Student only</option> */}
                         </Form.Control>
                         </Form.Group>
 
@@ -89,8 +88,7 @@ const QandaForm = ({channel_id, board_id, card_id} ) => {
 
 
                     ) : (
-                        // <Button>To Instructor Only</Button>
-
+             
                         <Form.Group controlId="studentTeacherSelect">
                         <Form.Label>Send to</Form.Label>
                         <Form.Control as="select"  onChange={(e) => setMessagetype(e.target.value)} >

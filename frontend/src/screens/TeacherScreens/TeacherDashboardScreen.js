@@ -501,6 +501,7 @@ export const TeacherDashboardScreen = ({}) => {
 
                                 <Card style={{border:'None', padding:'10px'}}>
                                     <InputGroup>
+                                        <Button className="button_gen" onClick={()=>addCard('Announcement')}><i className="fa fa-bullhorn"></i></Button>
                                         <Button className="button_gen" onClick={()=>addCard('Notes')}><i className="fa fa-file-text"></i></Button>
                                         <Button className="button_gen" onClick={()=>addCard('Exam')}><i className="fa fa-pencil-square"></i></Button>
                                         <Button className="button_gen" onClick={()=>addCard('Live')}><i className="fa fa-video"></i></Button>
